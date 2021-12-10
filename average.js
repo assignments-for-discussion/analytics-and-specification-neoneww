@@ -27,7 +27,7 @@ const outlierDetector = (collection) => {
 
 function Check(numbers) {
 	const mean = calcMean(numbers);
-	const temp = outlierDetector(number);
+	const temp = outlierDetector(numbers);
 	if (temp.length > 1) return NaN;
 	return mean;
 }
@@ -43,5 +43,5 @@ function average(numbers) {
 	}
 }
 module.exports = {
-	average
+	average,
 };
