@@ -1,10 +1,20 @@
-function Check(numbers) {
+function calcMean(numbers) {
 	const n = numbers.length;
 	const mean = numbers.reduce((a, b) => a + b, 0) / n;
+	return mean;
+}
+
+function calcStd(numbers) {
+	const mean = calcMean(numbers);
 	const std = Math.sqrt(
 		numbers.map((x) => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / n
 	);
+	return std;
+}
 
+function Check(numbers) {
+	const mean = calcMean(numbers);
+	const std = calcStd(numbers);
 	var flag = 0;
 	for (let x of numbers) {
 		if (x > 3 * std || x < 3 * std) {
@@ -26,7 +36,7 @@ function average(numbers) {
 		numbers = numbers.filter(
 			(item) => typeof item == 'number' && !isNaN(item)
 		);
-		return Check(number);
+		return Check(numbers);
 	}
 }
 module.exports = { average };
