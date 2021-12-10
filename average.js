@@ -1,11 +1,4 @@
-function average(numbers) {
-	if (numbers.length == 0) {
-		return NaN;
-	}
-
-	// filterning all the Numbers
-	numbers = numbers.filter((item) => typeof item == 'number' && !isNaN(item));
-
+function Check(numbers) {
 	/*
 	if we have Anomalies in our dataset 
 	this means something is wrong with the sensor or battery
@@ -29,6 +22,17 @@ function average(numbers) {
 	}
 
 	return mean;
+}
+
+function average(numbers) {
+	if (numbers.length == 0) {
+		return NaN;
+	}
+
+	// filterning all the Numbers
+	numbers = numbers.filter((item) => typeof item == 'number' && !isNaN(item));
+
+	return Check(number);
 }
 
 module.exports = { average };
