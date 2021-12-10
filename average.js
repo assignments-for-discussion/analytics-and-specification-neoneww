@@ -1,9 +1,4 @@
 function Check(numbers) {
-	/*
-	if we have Anomalies in our dataset 
-	this means something is wrong with the sensor or battery
-	when we get a value more or less than 3 * standard deviation then we get a Anomalie
-	*/
 	const n = numbers.length;
 	const mean = numbers.reduce((a, b) => a + b, 0) / n;
 	const std = Math.sqrt(
@@ -14,25 +9,24 @@ function Check(numbers) {
 	for (let x of numbers) {
 		if (x > 3 * std || x < 3 * std) {
 			flag = 1;
+			break;
 		}
 	}
-
 	if (flag == 1) {
 		return NaN;
+	} else {
+		return mean;
 	}
-
-	return mean;
 }
-
 function average(numbers) {
 	if (numbers.length == 0) {
 		return NaN;
+	} else {
+		// filterning all the Numbers
+		numbers = numbers.filter(
+			(item) => typeof item == 'number' && !isNaN(item)
+		);
+		return Check(number);
 	}
-
-	// filterning all the Numbers
-	numbers = numbers.filter((item) => typeof item == 'number' && !isNaN(item));
-
-	return Check(number);
 }
-
 module.exports = { average };
