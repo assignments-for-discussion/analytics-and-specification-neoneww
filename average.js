@@ -13,13 +13,17 @@ function calcStd(numbers) {
 	return std;
 }
 
-function Check(numbers) {
-	const mean = calcMean(numbers);
-	const std = calcStd(numbers);
+function checker(numbers, mean, std) {
 	for (let x of numbers) {
 		if (x > 3 * std || x < 3 * std) return NaN;
 	}
 	return mean;
+}
+
+function Check(numbers) {
+	const mean = calcMean(numbers);
+	const std = calcStd(numbers);
+	return checker(numbers, mean, std);
 }
 function average(numbers) {
 	if (numbers.length == 0) {
