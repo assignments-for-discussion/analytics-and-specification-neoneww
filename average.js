@@ -6,9 +6,6 @@ function calcMean(numbers) {
 const outlierDetector = (collection) => {
 	const size = collection.length;
 	let q1, q3;
-	if (size < 2) {
-		return collection;
-	}
 	const sortedCollection = collection.slice().sort((a, b) => a - b);
 	if (((size - 1) / 4) % 1 === 0 || (size / 4) % 1 === 0) {
 		q1 =
@@ -30,7 +27,7 @@ const outlierDetector = (collection) => {
 
 function Check(numbers) {
 	const mean = calcMean(numbers);
-	temp = outlierDetector(number);
+	const temp = outlierDetector(number);
 	if (temp.length > 1) return NaN;
 	return mean;
 }
