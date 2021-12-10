@@ -6,11 +6,9 @@ function calcMean(numbers) {
 
 function filterOutliers(someArray) {
 	if (someArray.length < 4) return someArray;
-
-	let values, q1, q3, iqr, maxValue, minValue;
-
+	var values, iqr, maxValue, minValue;
+	var q1, q2;
 	values = someArray.slice().sort((a, b) => a - b);
-
 	if ((values.length / 4) % 1 === 0) {
 		q1 =
 			(1 / 2) *
@@ -23,11 +21,9 @@ function filterOutliers(someArray) {
 		q1 = values[Math.floor(values.length / 4 + 1)];
 		q3 = values[Math.ceil(values.length * (3 / 4) + 1)];
 	}
-
 	iqr = q3 - q1;
 	maxValue = q3 + iqr * 1.5;
 	minValue = q1 - iqr * 1.5;
-
 	return values.filter((x) => x >= minValue && x <= maxValue);
 }
 
