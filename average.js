@@ -6,21 +6,19 @@ function calcMean(numbers) {
 const outlierDetector = (collection) => {
 	const size = collection.length;
 	let q1, q3;
-	const sortedCollection = collection.slice().sort((a, b) => a - b);
+	const sc = collection.slice().sort((a, b) => a - b);
 	if (((size - 1) / 4) % 1 === 0 || (size / 4) % 1 === 0) {
-		q1 =(1 / 2)*(sortedCollection[Math.floor(size / 4) - 1]
-		+sortedCollection[Math.floor(size / 4)]);
-		q3 =(1 / 2)*(sortedCollection[Math.ceil((size * 3) / 4) - 1]
-		+sortedCollection[Math.ceil((size * 3) / 4)]);
+		q1 =(1 / 2)*(sc[Math.floor(size / 4) - 1]+sc[Math.floor(size / 4)]);
+		q3 =(1 / 2)*(sc[Math.ceil((size * 3) / 4) - 1]+sc[Math.ceil((size * 3) / 4)]);
 	}
 	else
 	{
-		q1 = sortedCollection[Math.floor(size / 4)];
-		q3 = sortedCollection[Math.floor((size * 3) / 4)];
+		q1 = sc[Math.floor(size / 4)];
+		q3 = sc[Math.floor((size * 3) / 4)];
 	}
 	const iqr = q3 - q1;
 	const maxValue = q3 + iqr * 1.5;
-	return sortedCollection.filter((value) => value >= maxValue);
+	return sc.filter((value) => value >= maxValue);
 };
 
 function Check(numbers) {
