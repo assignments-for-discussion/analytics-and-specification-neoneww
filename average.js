@@ -31,6 +31,7 @@ function Check(numbers) {
 	if (temp.length > 1) return NaN;
 	return mean;
 }
+
 function average(numbers) {
 	if (numbers.length == 0) {
 		return NaN;
@@ -41,4 +42,6 @@ function average(numbers) {
 		return Check(numbers);
 	}
 }
-module.exports = { average };
+module.exports = {
+	average
+};
