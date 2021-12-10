@@ -5,6 +5,7 @@ function calcMean(numbers) {
 }
 
 function calcStd(numbers) {
+	const n = numbers.length;
 	const mean = calcMean(numbers);
 	const std = Math.sqrt(
 		numbers.map((x) => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / n
@@ -15,24 +16,17 @@ function calcStd(numbers) {
 function Check(numbers) {
 	const mean = calcMean(numbers);
 	const std = calcStd(numbers);
-	var flag = 0;
 	for (let x of numbers) {
 		if (x > 3 * std || x < 3 * std) {
-			flag = 1;
-			break;
+			return NaN;
 		}
 	}
-	if (flag == 1) {
-		return NaN;
-	} else {
-		return mean;
-	}
+	return mean;
 }
 function average(numbers) {
 	if (numbers.length == 0) {
 		return NaN;
 	} else {
-		// filterning all the Numbers
 		numbers = numbers.filter(
 			(item) => typeof item == 'number' && !isNaN(item)
 		);
