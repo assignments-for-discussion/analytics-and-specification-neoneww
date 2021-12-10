@@ -3,34 +3,35 @@ function calcMean(numbers) {
 	const mean = numbers.reduce((a, b) => a + b, 0) / n;
 	return mean;
 }
-
-function filterOutliers(someArray) {
-	if (someArray.length < 4) return someArray;
-	var values, iqr, maxValue, minValue;
-	var q1, q2;
-	values = someArray.slice().sort((a, b) => a - b);
-	if ((values.length / 4) % 1 === 0) {
+const outlierDetector = (collection) => {
+	const size = collection.length;
+	let q1, q3;
+	if (size < 2) {
+		return collection;
+	}
+	const sortedCollection = collection.slice().sort((a, b) => a - b);
+	if (((size - 1) / 4) % 1 === 0 || (size / 4) % 1 === 0) {
 		q1 =
 			(1 / 2) *
-			(values[values.length / 4] + values[values.length / 4 + 1]);
+			(sortedCollection[Math.floor(size / 4) - 1] +
+				sortedCollection[Math.floor(size / 4)]);
 		q3 =
 			(1 / 2) *
-			(values[values.length * (3 / 4)] +
-				values[values.length * (3 / 4) + 1]);
+			(sortedCollection[Math.ceil((size * 3) / 4) - 1] +
+				sortedCollection[Math.ceil((size * 3) / 4)]);
 	} else {
-		q1 = values[Math.floor(values.length / 4 + 1)];
-		q3 = values[Math.ceil(values.length * (3 / 4) + 1)];
+		q1 = sortedCollection[Math.floor(size / 4)];
+		q3 = sortedCollection[Math.floor((size * 3) / 4)];
 	}
-	iqr = q3 - q1;
-	maxValue = q3 + iqr * 1.5;
-	minValue = q1 - iqr * 1.5;
-	return values.filter((x) => x >= minValue && x <= maxValue);
-}
+	const iqr = q3 - q1;
+	const maxValue = q3 + iqr * 1.5;
+	return sortedCollection.filter((value) => value >= maxValue);
+};
 
 function Check(numbers) {
 	const mean = calcMean(numbers);
-	temp = filterOutliers(numbers, mean);
-	if (temp.length != numbers.length) return NaN;
+	temp = outlierDetector(number);
+	if (temp.length > 1) return NaN;
 	return mean;
 }
 function average(numbers) {
