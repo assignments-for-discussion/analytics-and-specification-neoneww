@@ -17,5 +17,5 @@ it('ignores NaN in the input', () => {
 
 // when we get a Anomalie we return NaN
 it('Give NaN when our data has some outliers', () => {
-	expect(average([1, 10000, 2])).to.be.NaN;
+	expect(average([1, 2, 3, 4, 5, 6, 7, 10000, 2])).to.be.NaN;
 });
