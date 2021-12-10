@@ -11,7 +11,7 @@ function average(numbers) {
 	this means something is wrong with the sensor or battery
 	when we get a value more or less than 3 * standard deviation then we get a Anomalie
 	*/
-	const n = array.length;
+	const n = numbers.length;
 	const mean = numbers.reduce((a, b) => a + b, 0) / n;
 	const std = Math.sqrt(
 		numbers.map((x) => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / n
