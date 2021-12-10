@@ -1,5 +1,5 @@
 function average(numbers) {
-	if (numbers.length() == 0) {
+	if (numbers.length == 0) {
 		return NaN;
 	}
 
