@@ -4,21 +4,37 @@ function calcMean(numbers) {
 	return mean;
 }
 
-function calcStd(numbers) {
-	const n = numbers.length;
-	const mean = calcMean(numbers);
-	const std = Math.sqrt(
-		numbers.map((x) => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / n
-	);
-	return std;
+function filterOutliers(someArray) {
+	if (someArray.length < 4) return someArray;
+
+	let values, q1, q3, iqr, maxValue, minValue;
+
+	values = someArray.slice().sort((a, b) => a - b);
+
+	if ((values.length / 4) % 1 === 0) {
+		q1 =
+			(1 / 2) *
+			(values[values.length / 4] + values[values.length / 4 + 1]);
+		q3 =
+			(1 / 2) *
+			(values[values.length * (3 / 4)] +
+				values[values.length * (3 / 4) + 1]);
+	} else {
+		q1 = values[Math.floor(values.length / 4 + 1)];
+		q3 = values[Math.ceil(values.length * (3 / 4) + 1)];
+	}
+
+	iqr = q3 - q1;
+	maxValue = q3 + iqr * 1.5;
+	minValue = q1 - iqr * 1.5;
+
+	return values.filter((x) => x >= minValue && x <= maxValue);
 }
 
 function Check(numbers) {
 	const mean = calcMean(numbers);
-	const std = calcStd(numbers);
-	for (let x of numbers) {
-		if (x > 3 * std) return NaN;
-	}
+	temp = filterOutliers(numbers, mean);
+	if (temp.length != numbers.length) return NaN;
 	return mean;
 }
 function average(numbers) {
