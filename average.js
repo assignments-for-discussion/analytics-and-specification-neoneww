@@ -24,7 +24,7 @@ const outlierDetector = (collection) => {
 function Check(numbers) {
 	const mean = calcMean(numbers);
 	const temp = outlierDetector(numbers);
-	if (temp.length > 1) return NaN;
+	if (temp.length >= 1) return NaN;
 	return mean;
 }
 
