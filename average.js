@@ -17,9 +17,7 @@ function Check(numbers) {
 	const mean = calcMean(numbers);
 	const std = calcStd(numbers);
 	for (let x of numbers) {
-		if (x > 3 * std || x < 3 * std) {
-			return NaN;
-		}
+		if (x > 3 * std || x < 3 * std) return NaN;
 	}
 	return mean;
 }
